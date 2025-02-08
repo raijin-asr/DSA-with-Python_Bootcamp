@@ -1,0 +1,282 @@
+# Insertion sort works by repeatedly
+    # taking an element from the unsorted portion of the list
+    # and inserting it into its correct position within the already-sorted portion
+
+
+# Working of Insertion Sort
+"""
+Suppose we need to sort the list below:
+
+7,4,1,3.2   # Unsoreted List
+
+To sort this list in ascending order, we follow these steps:
+1. Divide the list into sorted and unsorted sublists.
+Initially, we assume the first element is sorted (because there is only one element), and the rest of the list is unsorted
+
+7 | 4,1,3,2    # Sorted List: 7 | Unsorted List: 4,1,3,2
+
+2. Set the first unsorted element as the key element.
+
+In this case, the key element is 4.
+Next, we'll compare the key with the sorted sublist.
+
+3. Compare the key with the elements of the sorted sublist (moving from right to left) and insert it into its correct position.
+We'll compare the key element with the element to its left. If the key is smaller:
+
+Shift the sorted element, 7, to the right.
+Insert the key element, 4, in its position.
+
+4,7 | 1,3,2    # Sorted List: 4,7 | Unsorted List: 1,3,2
+Here, we have inserted the key element, 4, into its correct position instead of simply swapping it. This is why it's known as insertion sort.
+
+4. Repeat Step 3 for all the elements of the unsorted part.
+
+Now, the key element is 1.
+We'll compare the key element with the elements to its left one by one.
+
+Here's how to interpret this image:
+The key element, 1, is compared to 7. Since the key element is smaller, 7 is shifted to the right.
+Again, the key element, 1, is compared to 4. Since the key element is smaller, 4 is shifted to the right.
+Finally, 1 is inserted at the first position.
+
+1,4,7 | 3,2    # Sorted List: 1,4,7 | Unsorted List: 3,2
+
+Note: If the key is larger than or equal to the element to its left, we stop the comparison because the element is already in the correct position.
+
+5. Repeat Step 4 for all elements in the unsorted part.
+    
+Now, the key element is 3.
+We'll compare the key element with the elements to its left one by one.
+
+Here's how to interpret this image:
+The key element, 3, is compared to 7. Since the key element is smaller, 7 is shifted to the right.
+The key element, 3, is compared to 4. Since the key element is smaller, 4 is shifted to the right.
+
+Finally, 3 is inserted at the second position.
+
+1,3,4,7 | 2    # Sorted List: 1,3,4,7 | Unsorted List: 2
+
+6. Repeat Step 5 for all elements in the unsorted part.
+    
+Now, the key element is 2.
+We'll compare the key element with the elements to its left one by one.
+
+Here's how to interpret this image:
+The key element, 2, is compared to 7. Since the key element is smaller, 7 is shifted to the right.
+The key element, 2, is compared to 4. Since the key element is smaller, 4 is shifted to the right.
+The key element, 2, is compared to 3. Since the key element is smaller, 3 is shifted to the right.
+
+Finally, 2 is inserted at the third position.
+
+1,2,3,4,7    # Sorted List: 1,2,3,4,7 | Unsorted List:
+
+7. Repeat Step 6 for all elements in the unsorted part.
+    
+Now, the unsorted part is empty, and the list is sorted.
+1,2,3,4,7    # Sorted List: 1,2,3,4,7 | Unsorted List:"""
+
+
+# Thought Process to Implement Insertion Sort
+"""
+This is how we implement insertion sort in Python:
+
+1. Divide the array into sorted and unsorted sublists by finding the key element.
+The key will always be the first element of the unsorted part.
+
+7,4,1,3,2    # Sorted List: 7 | Unsorted List: 4,1,3,2   | key element: 4
+"""
+
+#Let i be the index of the key. Then,
+key = lst[i]
+
+# This will help us virtually divide our list into two parts. All indexes less than i now belong to the sorted part.
+# Note: Initially, the sorted part contains only one element, 7. A list with a single element is always considered sorted.
+
+# 2. Compare the key with the sorted elements one by one (from right to left) until the key element is either equal to or smaller.
+# If the sorted element to the left is larger than the key, we
+# --Shift that element one position to the right.
+# --Keep repeating this process until the sorted element is smaller than the key.
+# --Finally, insert key at the correct position.
+
+# Here's how we can do it.
+key = lst[i] # key = 4
+
+j = i - 1 # j = 4 - 1 = 3
+
+# compare the key element with elements to its left one by one
+# end the loop if the key element is larger or equal  
+while key <= lst[j] and j >= 0: # key 4 element is smaller , here 4 < 7 , and j >= 0
+
+    # shift the element to its right
+    lst[j + 1] = lst[j] # shift 7 to the right
+  
+    # decrease j to go to the next element to its left
+    j = j - 1  # j = 3 - 1 = 2
+
+# insert the key element at the correct position
+lst[j + 1] = key  # insert 4 at the correct position
+
+# Next, we will use a loop to repeat this process for all the elements in the list.
+
+# 3. Repeat Step 1 and Step 2 until all elements are sorted.
+# Now, we will add an outer loop(for) to repeat step 1 and step 2 for all elements.
+
+
+# iterate from index 1 to last index
+for i in range(1, len(lst)):
+
+   #here same code as above
+
+# Source Code: Insertion Sort------------------------
+def insertion_sort(lst):
+    
+    for i in range(1, len(lst)):
+        key = lst[i]
+        
+        j = i - 1
+        
+        while j >= 0 and key < lst[j]:
+            lst[j + 1] = lst[j]
+            j = j - 1
+ 
+        lst[j + 1] = key
+    
+    return lst
+ 
+data =  [7, 4, 1, 3, 2]
+ 
+print(f"Unsorted List: {data}")
+sorted_list = insertion_sort(data)
+print(f"Sorted List: {sorted_list}")
+
+# OUTPUT:
+# Unsorted List: [7, 4, 1, 3, 2]
+# Sorted List: [1, 2, 3, 4, 7]
+
+
+# PROBLEM1: Create a function named insertion_sort() that takes a list as its argument.
+# Sort the list in ascending order within the function and return the sorted list.
+# Print the sorted list outside the function.
+
+def insertion_sort(lst):
+    for i in range(1, len(lst)):
+        key = lst[i] 
+        j = i - 1
+        while j >= 0 and key < lst[j]:
+            lst[j + 1] = lst[j]
+            j = j - 1
+
+        lst[j + 1] = key
+    return lst
+
+# take integer inputs and convert it to a list
+data_list = list(map(int, input().split()))
+
+# call the insertion_sort() function
+result = insertion_sort(data_list)
+
+# print the sorted list
+print(result)
+
+# OUTPUT:
+# Input 
+# 1 15 6 8 2 5 9
+# Your Output 
+# [1, 2, 5, 6, 8, 9, 15]
+# Expected Output 
+# [1, 2, 5, 6, 8, 9, 15]
+
+
+# PROBLEM2: Sort the List Items in Descending Order--------
+def insertion_sort(lst):
+    # write your code here
+    for i in range(1, len(lst)):
+        key = lst[i] 
+        j = i - 1
+        while j >= 0 and key > lst[j]:  # Change the comparison to '>' for descending order
+            lst[j + 1] = lst[j]
+            j = j - 1
+
+        lst[j + 1] = key
+    return lst
+
+# take integer inputs and convert it to a list
+data_list = list(map(int, input().split()))
+
+# call the insertion_sort() function
+result = insertion_sort(data_list)
+
+# print the sorted list
+print(result)
+
+# OUTPUT:
+# Input 
+# 1 15 6 8 2 5 9
+# Your Output 
+# [15, 9, 8, 6, 5, 2, 1]
+# Expected Output 
+# [15, 9, 8, 6, 5, 2, 1]
+
+# PROBLEM3: Partial Insertion Sort---------
+def perform_partial_sort(lst, n):
+    for i in range(1, n):
+        key = lst[i] 
+        j = i - 1
+        while j >= 0 and key < lst[j]:
+            lst[j + 1] = lst[j]
+            j = j - 1
+        lst[j + 1] = key
+    return lst[:n]   # return n elements
+
+# take integer inputs and convert it to a list
+data = list(map(int, input().split()))
+
+# take number of elements to sort
+n = int(input())
+
+sorted_partial_list = perform_partial_sort(data, n)
+print(sorted_partial_list)
+
+# OUTPUT:
+# Input
+# 1 15 6 8 2 5 9
+# 3
+
+# Your Output
+# [1, 6, 15]
+
+# Expected Output
+# [1, 6, 15]
+
+"""
+Time Complexity================
+Worst Case Complexity: 
+O(n^2)
+
+Suppose a list is sorted in ascending order, and you want to sort it in descending order. In this case, the worst-case complexity occurs.
+Each element has to be compared with each of the other elements. So, for every nth element, n-1 comparisons are made.
+
+Thus, the total number of comparisons is
+(n-1) + (n-2) + (n-3) + ... + 1 = n(n-1)/2
+=n^2 -n = O(n^2)
+
+Best Case Complexity: 
+O(n)
+When the list is already sorted, the outer loop runs for n number of times, whereas the inner loop doesn't run at all.
+So, there will be only n number of comparisons. Thus, the complexity is linear.
+
+Average Case Complexity: 
+O(n^2)
+It occurs when the list elements are in jumbled order (neither ascending nor descending)."""
+
+# Space Complexity
+# Space complexity is O(1) because an extra variable key is used.
+
+"""
+Applications of Insertion Sort====
+When to use insertion sort?
+--Use insertion sort for small lists or when your data is mostly in order. It's simple and works well when dealing with a limited number of items.
+
+When not to use insertion sort?
+==Avoid insertion sort for larger lists or when speed is essential. It can become slow for bigger datasets.
+--In those cases, opt for faster algorithms like merge sort or quick sort for better performance."""
