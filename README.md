@@ -4,3 +4,4 @@
     Day 2: Sorting Basics and Bubble Sort
     Day 3: Selection Sort
     Day 4: Insertion Sort
+    Day 5: Merge Sort
