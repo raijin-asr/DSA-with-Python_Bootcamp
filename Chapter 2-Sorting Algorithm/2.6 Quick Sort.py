@@ -1,0 +1,159 @@
+# Introduction to Quick Sort
+# The quick sort algorithm selects a random element of the list as the pivot and partitions the remaining elements into two sublists: those less than the pivot and those greater than the pivot.
+# The sublists are then sorted recursively.
+
+# Working of Quick Sort:
+"""
+Suppose we have the following unsorted list.
+7,2,1,6,4,5
+
+1. Select the pivot element.
+There are several variations of quick sort depending on what element is selected as the pivot.
+
+It is important to pick a good pivot element for the fast implementation of quick sort. A pivot can be:
+-The first element
+-The last element
+-The middle element
+-Any random element from the list
+
+We'll use the last element as our pivot element:
+7,2,1,6,4,5 (here 5 is the pivot element)
+
+2. Rearrange the list.
+Now, the elements that are smaller than the pivot are put on the left, and the elements larger than the pivot are put on the right.
+2,1,4,5,7,6
+
+3. Divide the sublists.
+We choose pivot elements again for the left and right sublists separately, and then we repeat step 2.
+2,1,4 | 5 | 7,6
+and repeat the process for the left and right sublists.
+2,1 | 4 | 5 | 6,7
+1,2 | 4 | 5 | 6,7
+
+4. Sort and merge the sublists.
+First, we sort and merge the divided elements left to the initial pivot. Then, we do the same to the divided elements to the right of the pivot.
+
+This leaves us with two sorted sublists.
+1,2,4,5,6,7
+
+Finally, we merge the left sublist, the pivot, and the right sublist to get the final sorted list.
+"""
+
+#Source Code: Quick Sort
+def quick_sort(lst):
+    length = len(lst)
+    
+    if length <= 1:
+        return lst     
+    else:
+        pivot = lst.pop()
+
+    right = []
+    left = []
+
+    for element in lst:
+       
+        if element > pivot:
+            right.append(element)        
+        else:
+            left.append(element)
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+list1 = [7, 2, 1, 6, 8, 5, 3, 4]
+print(f"Unsorted List: {list1}")
+
+sorted_list = quick_sort(list1)
+print(f"Sorted List: {sorted_list}")
+
+#output:
+# Unsorted List: [7, 2, 1, 6, 8, 5, 3, 4]
+# Sorted List: [1, 2, 3, 4, 5, 6, 7, 8]
+
+
+"""
+Problem 1 Description:
+Can you write the quick sort program on your own to sort elements in ascending order?
+
+Create a function named quick_sort() that takes a list as its argument.
+Inside the function, sort the list using quick sort.
+Return the sorted list.
+Print the sorted list outside the function.
+Example
+Test Input
+
+1 15 6 8 2 5 9
+Expected Output
+
+[1, 2, 5, 6, 8, 9, 15]
+"""
+
+def quick_sort(lst):
+    # write your code here
+    length = len(lst)
+    
+    if length <= 1:
+        return lst     
+    else:
+        pivot = lst.pop()
+
+    right = []
+    left = []
+
+    for element in lst:
+       
+        if element > pivot: #for descending order change to element < pivot
+            right.append(element)        
+        else:
+            left.append(element)
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+# take integer inputs and convert it to a list
+data_list = list(map(int, input().split()))
+
+sorted_list = quick_sort(data_list)
+print(sorted_list)
+
+
+# Pick Middle Element as Pivot
+# In the previous example, we selected the last element as the pivot. However, we can also select the middle element as the pivot.
+# The following code demonstrates how to select the middle element as the pivot in quick sort.
+
+def quick_sort(lst):
+    length = len(lst)
+    
+    if length <= 1:
+        return lst     
+    else:
+        pivot = lst.pop(length//2)
+
+    right = []
+    left = []
+
+    for element in lst:
+       
+        if element > pivot:
+            right.append(element)        
+        else:
+            left.append(element)
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+# take integer inputs and convert it to a list
+data_list = list(map(int, input().split()))
+
+sorted_list = quick_sort(data_list)
+print(sorted_list)
+
+"""
+Complexity Analysis
+The time and space complexities of quick sort are given below:
+
+Best Case Time Complexity	O(n logn)
+Worst Case Time Complexity	
+O(n2)
+O(n ^2)
+Average Time Complexity	O(n logn)
+Space Complexity	O(logn)
+"""
