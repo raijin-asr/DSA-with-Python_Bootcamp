@@ -6,3 +6,4 @@
     Day 4: Insertion Sort
     Day 5: Merge Sort
     Day 6: Quick Sort
+    Day 7: Counting Sort

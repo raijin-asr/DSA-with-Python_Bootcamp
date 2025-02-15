@@ -1,0 +1,182 @@
+#Counting sort is a way to arrange the items in a list by counting how many times each item appears. 
+# We then put the elements in order based on those counts.
+
+"""
+Working of Counting Sort
+Let's consider a list of integers.
+5,8,4,9,7,10,3,5,4,9
+
+1. Find the largest element (max).
+Here, 10 is the largest element.
+
+2. Create the counting list to count the occurrence of each element.
+Create a new list that has one element more than max.
+
+We know that our max element is 10. So, we need a new list that has 10 + 1 elements, i.e., 11 elements.
+index: 0 1 2 3 4 5 6 7 8 9 10
+counting list: 0,0,0,0,0,0,0,0,0,0,0
+
+Next, we'll fill up this counting list.
+
+3. Count the occurrence of each element and put the count in the respective index of the counting list.
+For example, element 5 occurs twice in the unsorted list. So, we add the number 2 in index 5 of the counting list.
+Similarly, element 8 occurs once in the unsorted list. So, we insert 1 in index 8 of the counting list, and so on.
+
+unsorted list: 
+5,8,4,9,7,10,3,5,4,9
+
+counting list:
+index: 0 1 2 3 4 5 6 7 8 9 10
+counting list: 0,0,0,1,2,2,0,1,1,2,1
+
+Basically, in a counting list:
+index - represents the value in our original list
+value - represents the occurrence
+
+4. Add the indexes of the counting list to the new sorted list.
+Now, go through the counting list sequentially and append each of its indexes to a new list based on the value in that index.
+The indices 0, 1, and 2 all have the values 0. So, we insert them 0 times in a new sorting list. Meaning we don't insert these elements in our new list.
+
+Next,
+the index 3 has the value 1, so we insert 3 once.
+the index 4 has the value 2, so we insert 4 twice,
+and so on.
+
+sorted list: 3,4,4,5,5,7,8,9,9,10
+
+As you can see, we've sorted all the elements.
+
+Note: Since counting sort uses the indexes of a list for sorting, it cannot be used for floating-point numbers.
+"""
+
+#Thought Process to Implement Counting Sort
+# 1. Find the largest element and create the counting list.
+max_element = max(lst)
+
+# create a list and initialize all its elements to 0 
+counting_list = [0] * (max_element + 1)
+
+# 2. Count the occurrences of the elements in the unsorted list.
+for num in lst:
+    counting_list[num] += 1
+
+# 3. Fill out the sorted list according to the value stored in the index of counting_list.
+sorted_output = []
+
+for index, value in enumerate(counting_list):
+    sorted_output.extend([index] * value)
+
+"""Source Code: Counting Sort """
+def counting_sort(lst):
+
+   # if list is empty or has one element, return itself 
+    if len(lst) <= 1:
+        return lst
+    
+    # find the largest element
+    # and create the counting list
+    max_element = max(lst)
+    counting_list = [0] * (max_element + 1)
+    
+    # fill the counting list with frequency of each number
+    for num in lst:
+        counting_list[num] += 1
+    
+    # create the sorted output list   
+    sorted_output = []
+    for index, value in enumerate(counting_list):
+        sorted_output.extend([index] * value)
+
+    return sorted_output
+
+input_list = [5, 8, 4, 9, 7, 10, 3, 5, 4, 9]
+print(f'Unsorted List: {input_list}')
+
+sorted_list = counting_sort(input_list)
+print(f'Sorted List: {sorted_list}')
+
+#Output
+# Unsorted List: [5, 8, 4, 9, 7, 10, 3, 5, 4, 9]
+# Sorted List: [3, 4, 4, 5, 5, 7, 8, 9, 9, 10]
+
+#Problem1: descending order
+#To sort the list in descending order, we need to reverse the counting list.
+#We can achieve this by iterating through the counting list in reverse order and appending the index to the sorted list.
+
+def counting_sort_desc(lst):
+    if len(lst) <= 1:
+        return lst
+
+    max_element = max(lst)
+    counting_list = [0] * (max_element + 1)
+
+    for num in lst:
+        counting_list[num] += 1
+
+    sorted_output = []
+    for index in range(len(counting_list) - 1, -1, -1):
+        sorted_output.extend([index] * counting_list[index])
+
+    return sorted_output
+
+#Problem2: Count Unique Elements in a List
+"""
+Problem Description
+Create a program to find the number of unique elements in a list.
+
+Create a function named count_unique_elements() to count the number of unique elements in a list.
+The count_unique_elements() function should accept a single argument, a list. It will return the count of unique elements.
+Print the result from outside the function.
+For instance, [10, 20, 10, 20, 20, 20, 30] contains three unique elements: 10, 20 and 30.
+
+Assumption: The input list will only contain non-negative integers.
+
+Hint: Once we create the counting list, it becomes much easier to solve this problem.
+
+Example
+Test Input
+
+4 2 2 1 3 2 4 4 1 5
+Expected Output
+
+5"""
+#To count the number of unique elements in a list, we can use the counting list.
+#The number of unique elements is the count of non-zero elements in the counting list.
+
+def count_unique_elements(lst):
+
+    # get counting list
+    max_element = max(lst)
+    counting_list = [0] * (max_element + 1)
+
+    for num in lst:
+        counting_list[num] += 1
+
+    # count unique elements using counting_list
+    unique_count = 0
+
+    for count in counting_list:
+        if count != 0:
+            unique_count += 1
+
+    return unique_count
+ 
+
+# take integer inputs and convert it to a list
+data_list = list(map(int, input().split()))
+
+sorted_list = count_unique_elements(data_list)
+print(sorted_list)
+
+
+"""
+Complexity Analysis
+The time and space complexities of counting sort are given below:
+
+Time Complexity	O(n + k)
+Space Complexity	O(n + k)
+
+Here,
+n - The total number of elements to be sorted.
+k - The range of the input values.
+"""
