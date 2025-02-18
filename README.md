@@ -8,3 +8,4 @@
     Day 6: Quick Sort
     Day 7: Counting Sort
     Day 8: Binary Search
+    Day 9: Linear Search
