@@ -9,3 +9,4 @@
     Day 7: Counting Sort
     Day 8: Binary Search
     Day 9: Linear Search
+    Day10: Linked list
