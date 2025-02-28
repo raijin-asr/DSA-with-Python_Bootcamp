@@ -211,5 +211,277 @@ linked_list.display()
 
 """
 Insert Node at the Given Position
+Suppose we have the following linked list.
 
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+Let's say we need to insert a new node at position 5 (after node with value 7). Here are the steps to achieve it.
+
+Let's say we need to insert a new node at position 5 (after node with value 7). Here are the steps to achieve it.
+
+1. Create a new node.
+new_node = Node(11)
+
+data next
+11 -> None
+
+2. Move the pointer to one position ahead of the desired position and assign it to the current variable.
+
+current = self.head
+for i in range(1, position - 1):
+    current = current.next
+
+Note: We move to position - 1 instead of position because we have to assign the next pointer of position - 1 to our new node.
+Since we have to insert at the fifth position, current should be at the fourth position.
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+    current
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+            current
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+                    current 
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+                                current
+
+3. Make the new node point to the next node of the current node.
+new_node.next = current.next
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+                                current
+                                new_node
+                                data next
+                                11 -> None
+
+4. Make the next of the current node point to the new node.
+current.next = new_node
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 11 | | -> 6 | | -> None
+                                current     new_node
+"""
+
+# Source Code: Insert a Node at the Given Position
+# method to insert a node at a specific position
+def insert_node_at_position(self, data, position):
+    
+    new_node = Node(data)
+    current = self.head
+    
+    for i in range(1, position -1 ):
+        current = current.next 
+    
+    new_node.next = current.next
+    current.next = new_node
+
+# Output
+# Original Linked List:
+# 80->9->14->None
+
+# After inserting 11 at position 3:
+# 80->9->11->14->None
+
+# Note: The code doesn't work if we insert at position one or at a position greater than the size of the linked list.
+
+"""
+Insert Node in a Linked List
+The program we wrote to insert a node doesn't work if:
+
+    --the linked list is empty
+    --the position is negative
+    --the position is greater than the number of nodes.
+
+Let's address these situations as well by creating a universal method to insert nodes. For this, we'll use the separate methods we just discussed as helpers.
+"""
+# universal insert method
+def insert_node(self, data, position=None):
+    if position is None:
+        self.append_node(data)
+        return
+
+    if position <= 0 or position > self.get_length() + 1:
+        print("Invalid position")
+        return
+
+    if position == 1:
+        self.insert_node_at_beginning(data)
+    elif position == self.get_length() + 1:
+        self.append_node(data)
+    else:
+        self.insert_node_at_position(data, position)
+
+
+# Output
+
+# Original Linked List:
+# 80->9->14->None
+
+# After inserting 1 at position 1:
+# 1->80->9->14->None
+
+# After inserting 15 without position:
+# 1->80->9->14->15->None
+
+# Invalid position
+# After inserting 100 at position -1:
+# 1->80->9->14->15->None
+
+# Invalid position
+# After inserting 50 at position 100:
+# 1->80->9->14->15->None
+
+# After inserting 55 at position 3:
+# 1->80->55->9->14->15->None
+
+"""
+Delete From the Linked List
+Now, we will address the deletion process.
+
+We can delete a node at any position in a linked list. There are two cases for node deletion:
+    --Delete the first node.
+    --Delete the node at a given position.
+"""
+
+# Delete the First Node
+"""
+Suppose we have the following linked list.
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+
+Process to Delete the First Node
+
+We can simply remove the first node by making the second node as the new head node.
+self.head = self.head.next
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+                head
+
+Note: For an empty linked list, we first need to check if the head exists. Otherwise, the code above results in an error.
+
+"""
+
+# Source Code: Delete the First Node
+# Now, let's combine the code for deleting the first or head node.
+# method to delete the first node
+def delete_node(self):
+    
+    # if the linked list is not empty
+    if self.head:
+
+        # make second node as new head node
+        self.head = self.head.next
+
+# Output
+
+# Original Linked List:
+# 8->3->9->7->6->None
+
+# After deleting the first node - node(8):
+# 3->9->7->6->None
+
+# After deleting the first node - node(3):
+# 9->7->6->None
+
+# Note: A common practice during delete operation is to return the value of the node being deleted. This helps keep track of which node is being deleted.
+
+"""
+Delete a Node at the Given Position
+Suppose we have the following linked list.
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+
+Let's delete the fourth node from the above list.
+
+Process to Delete a Node
+To delete the fourth node, we can simply link the third node to the fifth node.
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+                        prev     
+
+To implement it in our program, we traverse until we reach the third node.
+
+1. Traverse until the current node is the node at position-1.
+
+# delete node at this position
+position = 4
+current = self.head
+
+    # the current variable is the node at (position - 1)
+    for i in range(1, position - 1):
+        current = current.next
+
+2. Link the node at position-1 to position+1.
+
+Link the next attribute of the current node to the node at position + 1.
+current.next = current.next.next
+
+head -> 8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | | -> None
+                        current
+
+Note: The above code cannot be used to delete the node at the first position.
+"""
+
+# Source Code: Delete Node at Given Position
+# In this program, we have used the delete_node() method to delete the node at the given position.
+
+# We have also added conditions to:
+#   --delete the first node if the position is 1
+#   --handle an empty linked list
+#   --handle positions greater than the number of nodes
+
+# method to delete a node at the given position
+def delete_node(self, position):
+    # Check if the position is valid
+    if position <= 0 or position > self.get_length():
+        print("Invalid position")
+        return
+
+    # if linked list is empty
+    if not self.head:
+        return
+
+    # condition to delete node at the first position
+    if position == 1:
+        self.head = self.head.next
+        return
+
+    current = self.head
+
+    # Traverse the list to find the node before the one to be deleted
+    for i in range(1, position - 1):
+        # condition to handle if position
+        # is greater than number of nodes
+        if not current.next:
+            return
+        current = current.next        
+
+    # current.next is the node to be deleted
+    # current.next.next is the node after the node to be deleted
+    if current.next:
+        current.next = current.next.next
+
+# Output
+
+# Original List:
+# 8->3->9->7->6->None
+
+# After deleting node at position 2:
+# 8->9->7->6->None
+
+# After deleting node at position 1:
+# 9->7->6->None
+
+# Invalid position
+# After deleting node at position 10:
+# 9->7->6->None
+
+"""
+Complexity Analysis of Linked List Operations
+
+The table below summarizes the time complexity of the various linked list operations we've learned so far:
+
+Operation	Time Complexity
+Traversal	O(n)
+Insertion at Beginning	O(1)
+Insertion at Other Positions	O(n)
+Insertion Into an Empty Linked List	O(1)
+Deletion at Beginning	O(1)
+Deletion at Other Positions	O(n)
 """
