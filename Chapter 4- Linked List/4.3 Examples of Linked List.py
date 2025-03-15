@@ -245,3 +245,309 @@ def reverse_linked_list(self):
 
 # Reversed Linked List:
 # 8->6->4->2->None
+
+"""
+Concatenate Two Linked Lists
+If we append one linked list to the end of another linked list, it's called concatenation.
+
+Suppose we have two linked lists:
+Linked list 1: 2->4->6->None
+Linked list 2: 8->10->12->None
+
+After concatenation, Linked List 1 should be:
+
+2->4->6->8->10->12->None
+"""
+
+# Thought Process
+# To concatenate two linked lists, we can follow these two steps:
+
+# 1. Traverse until we reach the last node of the first linked list.
+current = list1.head 
+
+# traverse the linked list
+while current.next:
+    current = current.next
+
+# 2. Link the last node of the first linked list to the first node of the second linked list.
+current.next = list2.head
+
+# Source Code: Concatenate Two Linked List
+# method to concatenate two linked lists
+# self is the first linked list
+# list2 is the second list 
+def concatenate(self, list2):
+
+    # handle if the first linked list is empty
+    if not self.head:
+        self.head = list2.head
+        return
+        
+        current = self.head 
+
+        # traverse the linked list
+        while current.next:
+            current = current.next
+        
+        # link the last node of list1 to
+        # the first node of list2 
+        current.next = list2.head
+
+# Output
+# Original linked_list1:
+# 2->9->6->8->None
+
+# linked_list2:
+# 2->9->6->8->None
+
+"""
+Practice:
+Find the Smallest Value in a Linked List
+
+Problem Description
+Can you write a program to print the smallest value in a linked list?
+
+-Add the find_smallest() method to the LinkedList class, using the outline provided in the editor.
+-The method should return the smallest value in the linked list.
+-Then print the smallest value.
+
+For example, the starting linked list will always be:
+90->80->50->60
+In this linked list, the smallest value is 50.
+
+Example
+Expected Output
+50
+
+"""
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def create_linked_list(self):
+        node1 = Node(80)
+        self.head = node1
+
+        node2 = Node(9)
+        node1.next = node2
+
+        node3 = Node(14)
+        node2.next = node3
+
+    # helper method to append a node at the end
+    def append_node(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+    # helper method to insert a node at the beginning
+    def insert_node_at_beginning(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    # helper method to insert a node at a specific position
+    def insert_node_at_position(self, data, position):
+        
+        new_node = Node(data)
+        current = self.head
+        
+        for i in range(1, position -1 ):
+            current = current.next 
+        
+        new_node.next = current.next
+        current.next = new_node
+
+    # universal insert method
+    def insert_node(self, data, position=None):
+        # if no position is given
+        # or position exceeds the length of the list
+        # insert at the end
+        if position is None or position >= self.get_length():
+            self.append_node(data)
+        elif position == 0:
+            self.insert_node_at_beginning(data)
+        else:
+            self.insert_node_at_position(data, position)
+        
+
+    # helper method to get the length of the linked list
+    def get_length(self):
+        current = self.head
+        length = 0
+        while current:
+            length += 1
+            current = current.next
+        return length
+
+    # traverse the list
+    def display(self):
+        current = self.head
+        while current:
+            print(f"{current.data}", end="->")
+            current = current.next
+        print(None)
+    
+    # method to return the smallest number 
+    def find_smallest(self):
+        # write your code here
+        if not self.head:
+            return None
+
+        current = self.head
+        smallest = current.data
+
+        while current:
+            if current.data < smallest:
+                smallest = current.data
+            current = current.next
+
+        return smallest
+
+# create a linked list
+linked_list = LinkedList()
+
+# append nodes
+linked_list.insert_node(90)
+linked_list.insert_node(80)
+linked_list.insert_node(50)
+linked_list.insert_node(60)
+
+smallest = linked_list.find_smallest()
+print(smallest)
+
+"""
+Practice2:
+Find the Middle Node
+Medium
+
+Problem Description
+Can you write a program to find the middle element in a linked list?
+-Add the find_middle_element() method to the LinkedList class using the outline provided in the editor.
+-The method should determine the middle element and return its data.
+-Print the returned data.
+
+How to solve it?
+-Initialize two variables slow and fast to the start of the linked list. The fast variable will be used for traversal.
+-During traversal, advance slow to the next element and fast two elements ahead.
+-When fast reaches the end, slow reaches the middle.
+
+Note: There are two middle elements in linked lists containing an even number of nodes. In such cases, return the second middle element.
+
+Example
+Test Input
+5 12 45 67 34 45
+
+Expected Output
+67
+"""
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    # helper method to append a node at the end
+    def append_node(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+    # helper method to insert a node at the beginning
+    def insert_node_at_beginning(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    # helper method to insert a node at a specific position
+    def insert_node_at_position(self, data, position):
+        
+        new_node = Node(data)
+        current = self.head
+        
+        for i in range(1, position -1 ):
+            current = current.next 
+        
+        new_node.next = current.next
+        current.next = new_node
+
+    # universal insert method
+    def insert_node(self, data, position=None):
+        # if no position is given
+        # or position exceeds the length of the list
+        # insert at the end
+        if position is None or position >= self.get_length():
+            self.append_node(data)
+        elif position == 0:
+            self.insert_node_at_beginning(data)
+        else:
+            self.insert_node_at_position(data, position)
+        
+
+    # helper method to get the length of the linked list
+    def get_length(self):
+        current = self.head
+        length = 0
+        while current:
+            length += 1
+            current = current.next
+        return length
+
+    # traverse the list
+    def display(self):
+        current = self.head
+        while current:
+            print(f"{current.data}", end="->")
+            current = current.next
+        print(None)
+    
+   # method to return the middle element 
+    def find_middle_element(self):
+        # write your code here
+        if not self.head:
+            return None
+
+        slow = self.head
+        fast = self.head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        return slow.data
+
+
+# create a linked list
+linked_list = LinkedList()
+
+# take inputs and convert it to a list
+data_list = list(map(int, input().split()))
+
+# append nodes from the list
+for node in data_list:
+    linked_list.insert_node(node)
+
+# get middle element's value
+middle = linked_list.find_middle_element()
+print(middle)

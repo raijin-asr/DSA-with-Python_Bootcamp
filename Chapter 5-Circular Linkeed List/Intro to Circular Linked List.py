@@ -1,0 +1,214 @@
+# Introduction
+
+"""
+linked lists where the last node points back to the head node. This kind of linked list is called a circular linked list
+Here, the last node points to the head node, creating a circular structure.
+
+head -> 1 -> 2 -> 3 -> 4 -> 5 -> head
+"""
+
+# Why Circular Linked Lists?
+"""
+Imagine you are playing songs from a playlist. The songs in the playlist are organized like a chain using a linked list.
+
+Each song becomes a node in the list, and they're connected in the order they play.
+head -> song1 -> song2 -> song3 -> song4 -> song5 -> head
+
+Once you reach the last song, the playlist will stop. But what if you want to keep the music playing in a loop?
+
+With a regular linked list, you'd need to start from the beginning to replay the first song after the last one.
+
+But there's a simpler solution—the circular linked list.
+
+In a circular linked list, the next pointer of the last song points back to the first song, creating a closed loop. This allows us to play songs continuously.
+Circular linked lists have uses beyond music.
+"""
+
+# Create a Circular Linked List
+# To convert a regular linked list to a circular linked list, we will make the last node point to the head node.
+node3.next = self.head
+
+# Source Code
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+
+    # create circular linked list
+    def create_linked_list(self):
+        node1 = Node(80)
+        self.head = node1
+
+        node2 = Node(9)
+        node1.next = node2
+
+        node3 = Node(14)
+        node2.next = node3
+
+        # make the last node point back to the head, making it circular
+        node3.next = self.head
+
+linked_list = CircularLinkedList()
+linked_list.create_linked_list()
+
+# If you run this program, you won't get any output because we haven't printed anything
+
+# ----Traverse a Circular Linked List
+# Traversal is the process of going through each node one by one.
+# In a singly linked list, we traverse until a node points to None (there is no next node).
+
+# However, in a circular linked list, we will traverse until a node points to the head node.
+
+# Thought Process to Apply Traversal
+# To traverse a circular linked list,
+
+# 1. Start at the head.
+current = self.head
+
+# 2. Loop as long as the next node is not the head node.
+current = self.head
+while current.next is not self.head:
+
+   # move to next node 
+   current = current.
+   
+# If current.next is head, we know for sure that it's the last node.
+# However, if we try to traverse an empty linked list, the code will not be executed as current is None.
+
+# So, it's important to check if the list is empty before traversing it. We can do this by creating an is_empty() method:
+def is_empty(self):
+    return  self.head is None
+
+# The is_empty() method will return
+# True - If the linked list is empty.
+# False - If the linked list is not empty.
+
+
+# Source Code: Traversal of Circular Linked List
+# create Node for linked list
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+# create a Circular Linked List class
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+        
+    # add an is_empty() method
+    def is_empty(self):
+        return  self.head is None
+
+    def traverse_list(self):
+
+        # add a condition to check if the list is empty
+        if not self.head:
+            print("Empty Linked List")
+            return
+
+        current = self.head
+        while current.next is not self.head:
+            print(f"{current.data} ->", end=" ")
+            current = current.next
+        # print the last node's data as well
+        print(f"{current.data} -> {self.head.data}")
+
+linked_list = CircularLinkedList()
+linked_list.traverse_list()
+
+# Output
+# Empty Linked List
+
+
+"""
+Practice:
+Sum of Nodes
+
+Problem Description
+Write a program to find the sum of all the nodes in a circular linked list.
+-You are provided with a function named compute_sum().
+-You need to add the data of all nodes and return the sum of the nodes.
+
+Example
+Test Input
+1 
+5 
+3 
+10
+Expected Output
+
+19
+"""
+
+# create Node for linked list
+class Node:
+
+    # initializer for the node class
+    def __init__(self, data):
+
+        # initialize data and next field
+        self.data = data
+        self.next = None
+
+# create a CircularLinkedList class
+class CircularLinkedList:
+    def __init__(self):
+        # initialize the head field to None
+        self.head = None
+
+    # method to create a linked list
+    def create_linked_list(self):
+
+        # take input for node data
+        data1 = int(input())
+        data2 = int(input())
+        data3 = int(input())
+        data4 = int(input())
+        # create 4 nodes with input values
+        node1 = Node(data1)
+        node2 = Node(data2)
+        node3 = Node(data3)
+        node4 = Node(data4)
+        # set head field to the first node
+        self.head = node1
+        # link the nodes
+        node1.next = node2
+        node2.next = node3
+        node3.next = node4
+        node4.next = self.head
+
+
+    def traverse_linked_list(self):
+        current = self.head
+        while current.next is not self.head:
+            print(f"{current.data} -> ", end="")
+            current = current.next
+        print(f"{current.data} -> {self.head.data}")
+        
+    def compute_sum(self):
+        if self.head is None:
+            return 0
+        
+        current = self.head
+
+        # initialize sum at 0
+        total = 0
+        while current.next is not self.head:
+            total += current.data
+            current = current.next
+
+        # add the last node's data as well
+        total += current.data
+
+        return total
+
+
+# create object of linked list
+linked_list = CircularLinkedList()
+linked_list.create_linked_list()
+print(linked_list.compute_sum())
