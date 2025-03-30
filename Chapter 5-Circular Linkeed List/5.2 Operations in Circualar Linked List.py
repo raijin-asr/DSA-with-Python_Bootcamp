@@ -242,3 +242,206 @@ def delete_from_beginning(self):
     current.next = self.head
 
 # Delete From a Circular Linked List With a Single Node
+"""
+Let's implement our previous deletion algorithm to a circular linked list that only has a single node.
+
+1. Get reference to the head node.
+temp = self.head
+
+2. Get reference to the last node.
+current = self.head
+while current.next is not self.head:
+    current = current.next
+
+3. Move the head node to the second node.
+self.head = self.head.next
+
+4. Make the last node point to the new head node.
+current.next = self.head
+
+To handle the scenario of deleting from a circular linked list with a single node, we can implement the following code:
+
+# helper to delete the only node of the linked list
+def delete(self):
+    temp = self.head
+    self.head = None
+We know, in an empty circular linked list, the head is None. So, when deleting the node, we can simply assign the head to None and avoid all computations.
+"""
+
+# Delete a Node at a Given Position
+"""
+Let's delete a value from a given position in a linked list.
+
+Suppose we have the following linked list.
+head
+8 | | -> 3 | | -> 9 | | -> 7 | | -> 6 | |
+
+To delete a node at the given position (say, the 4th position) in a linked list, we have to follow the steps below:
+
+1. Move to the third node and make it point to the fifth node.
+2. Delete the fourth node.
+"""
+
+# Thought Process
+"""
+Let's learn how to delete nodes at a given position programmatically.
+
+For that, we will take two references:
+-The first to point to the 4th node.
+-The second to point to the node before that (3rd node).
+
+We will follow the following steps to delete a node in a linked list:
+
+1. Take two references: let one reference point to the head of the list, and the other reference point to None.
+current = self.head
+prev_node = None
+
+2. Move the pointers till we have one reference at the 4th node and another pointer at the 3rd node.
+for i in range(1, position):
+    prev_node = current
+    current = current.next
+
+3. Link the third node to the fifth node.
+prev_node.next = current.next
+"""
+
+# Code: Delete From Given Position
+def delete_at_position(self, position):
+    # take two pointers
+    current = self.head
+    prev_node = None
+
+    # move pointers until we reach our desired node
+    for i in range(1, position):
+        prev_node = current
+        current = current.next
+
+    # point the previous node to the current.next node
+    prev_node.next = current.next
+
+# Complexity Analysis of Linked List Opearations
+"""
+The table below summarizes the time complexity of the various linked list operations we've learned so far:
+
+Operation	Time Complexity
+Traversal	O(n)
+Insertion at Beginning	O(1)
+Insertion at Other Positions	O(n)
+Insertion Into an Empty Linked List	O(1)
+Deletion at Beginning	O(1)
+Deletion at Other Positions	O(n)
+"""
+
+# Source Code: Delete Nodes from a Linked List
+def delete_nodes(self, position):
+    if self.head is None:
+        return "Error: The list is empty."
+    if position == 1:
+        if self.head.next == self.head:  # Only one node in the list
+            self.delete_only_node()
+        else:
+            self.delete_from_beginning()
+    else:
+        temp = self.head
+        count = 1
+        while temp.next != self.head:
+            count += 1
+            temp = temp.next            
+        if position > count:
+            return "Error: Position is out of bounds."
+        self.delete_at_position(position)
+
+"""
+Output
+
+Initial Circular Linked List:
+80 -> 9 -> 14 -> 80 
+
+Circular Linked List after deleting from the beginning:
+9 -> 14 -> 9 
+
+Circular Linked List after deleting at position 2:
+9 -> 9 
+
+Circular Linked List after deleting the only node:
+Empty Linked List
+In the above program, we implemented all the helper methods we have learned so far to delete a node.
+
+Then, we incorporated these helper methods into a single method named delete_nodes() to handle all cases of deletion.
+"""
+
+# Source Code: Complete Circular Linked List
+# helper to traverse the list 
+# and display the elements
+def display(self):
+    nodes = []
+    if self.head is None:
+        return "Empty Linked List"
+    current = self.head
+    while current.next is not self.head:
+        nodes.append(str(current.data))
+        current = current.next
+    nodes.append(str(current.data))
+    return " -> ".join(nodes) + f" -> {self.head.data} "
+
+# universal method to insert node
+def insert_node(self, data, position=None):
+    if not self.head:
+        self.append_into_empty(data)
+    elif not position or position == self.length() + 1:
+        self.append_node(data)
+    elif position == 1:
+        self.insert_at_beginning(data)
+    else:
+        self.insert_at_position(data, position)
+
+# universal method to insert node
+def delete_nodes(self, position):
+    # check if the list is empty
+    if self.head is None:
+        return "Error: The list is empty."
+
+    # if position is 1, check if it's the only node
+    if position == 1:
+        if self.head.next == self.head:  # Only one node in the list
+            self.delete_only_node()
+        else:
+            self.delete_from_beginning()
+    else:
+        # for positions other than 1, use delete_at_position
+        # first, ensure the position is not out of bounds
+        temp = self.head
+        count = 1
+        while temp.next != self.head:
+            count += 1
+            temp = temp.next
+        
+        if position > count:
+            return "Error: Position is out of bounds."
+
+        self.delete_at_position(position)
+"""
+Output
+
+Initial list:
+80 -> 9 -> 14 -> 80 
+
+After inserting 5 at the beginning:
+5 -> 80 -> 9 -> 14 -> 5 
+
+After appending 25 at the end:
+5 -> 80 -> 9 -> 14 -> 25 -> 5 
+
+After inserting 55 at position 3:
+5 -> 80 -> 55 -> 9 -> 14 -> 25 -> 5 
+
+After deleting the first node:
+80 -> 55 -> 9 -> 14 -> 25 -> 80 
+
+After deleting the node at position 2:
+80 -> 9 -> 14 -> 25 -> 80 
+
+After deleting the last node:
+80 -> 9 -> 14 -> 80 
+
+"""

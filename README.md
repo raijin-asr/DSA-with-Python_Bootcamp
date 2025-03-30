@@ -15,3 +15,5 @@
     Day13: Linked List Examples
     Day14: Intro to Circular Linked Lists and left of linked list examples
     Day15: Operaions in Circular Linked List
+    Day16: Delete operation in Circular Linked List
+    Day17: Left operations of Circular Linked List
