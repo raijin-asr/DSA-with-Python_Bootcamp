@@ -18,3 +18,4 @@
     Day16: Delete operation in Circular Linked List
     Day17: Left operations of Circular Linked List
     Day18: Examples of Circular Linked List
+    Day19: Doubly Linked List
