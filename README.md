@@ -20,3 +20,4 @@
     Day18: Examples of Circular Linked List
     Day19: Doubly Linked List
     Day20: Insert Operations in Doubly Linked List
+    Day21: Delete Operations in Doubly Linked List
