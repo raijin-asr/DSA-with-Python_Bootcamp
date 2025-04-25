@@ -22,3 +22,4 @@
     Day20: Insert Operations in Doubly Linked List
     Day21: Delete Operations in Doubly Linked List
     Day22: Examples of Doubly Linked List
+    Day23: Stack

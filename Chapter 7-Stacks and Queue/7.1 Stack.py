@@ -1,0 +1,520 @@
+# Introduction
+"""
+A stack is a linear data structure that follows the last-in-first-out (LIFO) principle. That means
+
+The last element added is the first to be removed from the stack.
+The first element added is the last to be removed from the stack.
+
+Real-Life Analogy
+If you add a new plate to this pile,
+    -it will be the first one to be removed.
+If you want to take the last plate,
+    -you will have to remove all the plates on top.
+
+Basically, the last plate added will be the first to be removed, and the first plate added to the pile will be the last to be removed.
+
+The pile of plates is a stack as it follows the LIFO principle
+"""
+
+# Create a Stack
+"""
+We can create a stack in three steps:
+
+1. Create an empty stack.
+We will use a list to create an empty stack.
+stack = []
+
+2. Push elements to the stack.
+We can use list's append() method to add elements at the end of the stack.
+# add three elements to the stack
+stack.append(5)
+stack.append(10)
+stack.append(100)
+3. Remove elements from the last.
+
+We need to pop (remove) elements from the end of the stack. This is because stack works on the last-in-first-out principle.
+
+We can use the list's pop() method to remove the last element from the list.
+
+# remove the last element
+item = stack.pop()
+
+"""
+
+# Visualize Stack
+# create class to represent stack
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        return self.stack.pop()
+
+    def print_stack(self, message):
+        print(f"{message}: {self.stack}")
+
+# initialize the stack
+stack1 = Stack()
+
+# add items to stack
+stack1.push(5)
+stack1.push(10)
+stack1.push(100)
+
+# print stack
+stack1.print_stack("Stack after pushing three items")
+
+# remove an item
+removed_item = stack1.pop()
+
+stack1.print_stack("Stack after popping")
+print(f"Removed item: {removed_item}")
+
+# remove an item again
+removed_item = stack1.pop()
+
+stack1.print_stack("Stack after popping again")
+print(f"Removed item: {removed_item}")
+
+# Source Code: Create a Stack
+# create class to represent stack
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        return self.stack.pop()
+
+    def print_stack(self, message):
+        print(f"{message}: {self.stack}")
+
+# initialize the stack
+stack1 = Stack()
+
+# add items to stack
+stack1.push(5)
+stack1.push(10)
+stack1.push(100)
+
+# print stack
+stack1.print_stack("Stack after pushing three items")
+
+# remove an item
+removed_item = stack1.pop()
+
+stack1.print_stack("Stack after popping")
+print(f"Removed item: {removed_item}")
+
+# remove an item again
+removed_item = stack1.pop()
+
+stack1.print_stack("Stack after popping again")
+print(f"Removed item: {removed_item}")
+
+# Output
+
+# Stack after pushing three items: [5, 10, 100]
+# Stack after popping: [5, 10]
+# Removed item: 100
+# Stack after popping again: [5]
+# Removed item: 10
+
+
+# Stack Operations
+"""
+Now that we know what a stack is, let's perform a few more functionalities to our stack.
+
+is_empty - Check if the stack is empty or not.
+peek - Return the element on the top of the stack without deleting it.
+"""
+
+# Check if Stack is Empty
+"""
+If we try to pop an element from an empty stack, we will get an error. This error is called stack underflow.
+
+Therefore, it's important to check if a stack is empty before popping elements.
+
+To determine if a stack is empty, we can simply find its length. If the length is 0, we know that the stack is empty.
+
+# return True if stack is empty
+# return False if stack is not empty
+def is_empty(self):
+    return len(self.stack) == 0
+Let's add this feature in our previous code.
+"""
+
+# Source Code: Stack Implementation
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    # check and return True if the stack is empty
+    def is_empty(self):
+        return len(self.stack) == 0
+        
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        # pop if the stack is not empty
+
+        if not self.is_empty():
+            return self.stack.pop()
+
+
+    def print_stack(self, message):
+        print(f"{message}: {self.stack}")
+
+stack1 = Stack()
+
+# add items to stack
+stack1.push(5)
+stack1.push(100)
+
+# print stack
+stack1.print_stack("Stack after pushing 2 items")
+
+# pop 100
+stack1.pop()
+
+# print stack
+stack1.print_stack("After first popping")
+
+# pop 5
+stack1.pop()
+
+stack1.print_stack("After second popping")
+
+# doesn't execute because the stack is empty
+stack1.pop()
+
+stack1.print_stack("After third popping")
+
+# Output
+
+# Stack after pushing 2 items: [5, 100]
+# After first popping: [5]
+# After second popping: []
+# After third popping: []
+
+# Peek the Element
+"""
+The pop() method removes the top element (last element) from the stack.
+
+However, sometimes, we may simply need to peek or examine the top element without removing it.
+
+We can achieve this by accessing the element at the -1 index.
+
+stack = []
+
+# add items
+stack.append(10)
+stack.append(20)
+stack.append(30)
+
+# get stack's top element (last item of the list)
+print(stack[-1])   # 30
+"""
+
+# Source Code: Complete Stack Implementation
+# create class to represent stack
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+
+    # return True if stack is empty
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def print_stack(self, message):
+        print(f"{message}: {self.stack}")
+
+stack1 = Stack()
+
+# add items to stack
+stack1.push(5)
+stack1.push(100)
+stack1.push(1000)
+
+# print stack
+stack1.print_stack("Initial stack")
+
+# peek the stack
+print(f"Peek the stack: {stack1.peek()}")
+
+stack1.print_stack("Stack after peeking")
+
+# pop the stack
+print(f"Removing an item: {stack1.pop()}")
+
+stack1.print_stack("After removing the item")
+
+# Output
+
+# Initial stack: [5, 100, 1000]
+# Peek the stack: 1000
+# Stack after peeking: [5, 100, 1000]
+# Removing an item: 1000
+# After removing the item: [5, 100]
+
+# Time Complexity
+"""
+In a stack, we only need to deal with the top element, regardless of the operation we perform or the size of the stack.
+
+Therefore, all stack operations take constant time.
+
+Time Complexity: O(1)
+
+Let's explore stack a little more by converting an infix expression to a postfix. But before that, here's an exercise for you.
+"""
+
+# Reverse a String
+"""
+Write a program to reverse a string using a stack.
+
+Take a string user input.
+Use a stack to reverse a string.
+Store the revered string in the result variable.
+Example
+Test Input
+
+Hello World
+Expected Output
+
+dlroW olleH
+"""
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+    
+    # check and return True if the stack is empty
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        # pop if the stack is not empty
+        if not self.is_empty():
+            return self.stack.pop()
+    
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+
+    def print_stack(self, message):
+        print(f"{message}: {self.stack}")
+
+def reverse_string(text):
+    # create a stack
+    stack = Stack()
+
+    # push each character to the stack
+    for char in text:
+        stack.push(char)
+
+    # pop each character from the stack and append it to the reversed string
+    reversed_text = ""
+    while not stack.is_empty():
+        reversed_text += stack.pop()
+
+    return reversed_text
+
+# add items to stack
+text = input()
+print(reverse_string(text))
+
+# Infix Expressions
+"""
+Generally, we write expressions in the form of a * b + c.
+
+Here, we evaluate a * b first, then add c to the result.
+
+Similarly, let's take another expression: a + b * c.
+
+We perform multiplication first, then addition. Thus, b * c is evaluated first, then the result is added to a.
+
+These expressions are called infix expressions because the operator is placed between the operands.
+
+From the second example, we can see that the operators cannot be evaluated immediately. We have to check the precedence of the operators and evaluate them accordingly.
+
+Such a process is slow for computers (to check precedence and then evaluate infix expressions).
+
+Instead, computers use postfix expressions (operators after the operands) to evaluate these expressions, which we will explore next.
+"""
+
+# Postfix Expressions
+"""
+Before we learn the conversion of infix to postfix expressions, let's take a look at how postfix works.
+
+The equivalent postfix expression for a * b + c is ab*c+.
+
+Here's how a computer processes this expression:
+
+    -Start with an empty stack.
+    -Scan a: push a onto the stack.
+    -Scan b: push b onto the stack.
+    -Scan *: pop a and b, calculate a*b, and push the result back onto the stack.
+    -Scan c: push c onto the stack.
+    -Scan +: pop c and the result of a*b, calculate their sum and push the result back onto the stack.
+
+    Similarly, the equivalent postfix expression for a + b * c is abc*+.
+
+Here's how a computer handles this expression:
+
+    -Start with an empty stack.
+    -Scan a: Push a onto the stack.
+    -Scan b: Push b onto the stack.
+    -Scan c: Push c onto the stack.
+    -Scan *: Pop b and c, calculate b * c, and push the result back onto the stack.
+    -Scan +: pop the result of b * c and a from the stack, compute (b * c) + a, and push the result back onto the stack.
+
+So instead of having to wait and check for precedence, in postfix expression, we can simply:
+
+    -Push each operand to the stack.
+    -Each operator pops the last two operands from the stack, evaluates them, and pushes the result back to the stack.
+
+Computers can perform computations much faster by utilizing a stack to process postfix expressions.
+
+Let's learn to convert infix expressions to postfix expressions.
+"""
+
+# Infix to Postfix Conversion Using Stack
+"""
+Our goal is to convert expressions like a * b + c to ab*c+. Similarly, a + c * b should be converted to acb*+.
+
+The conversion requires a stack to keep track of the operators and a string to store the postfix expression.
+
+In the case of operands, we simply append the operands to the postfix expression. However, operators follow the following steps:
+--If the stack is empty, add the operator to the stack.
+--If an operator with lower precedence tries to enter the stack, pop items until the operator at the top of the stack has lower or equal precedence.
+--All popped operators are appended to the postfix expression.
+--After the infix expression is done, pop all operators from the stack and append it to the postfix expression.
+
+Note: The stack can never have a higher precedence operator below the lower precedence operator.
+"""
+
+# Working of Infix to Postfix Conversion
+"""
+Let's see with images how a*b+c is converted to a postfix expression.
+
+We start with an empty stack and an empty postfix expression.
+1. Append operand a to postfix.
+2. Push the operator * to the stack.
+3. Append operand b to postfix.
+4. Compare the operator + with the top of stack *. Since the precedence of * is higher than +, pop * from the stack and add it to postfix.
+Now, since the stack is empty, push the operator + to stack.
+5. Append the operator c to postfix.
+6. Since the infix expression is done, pop all remaining operators from the stack and append them to postfix.
+
+"""
+
+# Working: Infix to Postfix
+"""
+Similarly, let's see with images how a + b * c is converted to a postfix expression.
+1. Append a to postfix.
+2. Push + to stack.
+3. Append b to postfix.
+4. Push * to stack (because the precedence of * is higher than +).
+5. Append c to postfix.
+6. Pop items from the stack and append them to postfix. In this case, * and + are added to postfix.
+
+Now that we are familiar with the working of infix to postfix conversion, let's look at the source code to implement it in Python using stack.
+"""
+
+# Source Code: Infix to Postfix Conversion
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+
+def infix_to_postfix(infix): 
+    
+    operators = {'+':1, '*':2} 
+
+    stack = Stack()
+    postfix = '' 
+
+    for character in infix:
+
+        # append operand to postfix
+        if character not in operators:  
+            postfix += character
+            continue
+        
+        # if stack is empty, push operator to stack
+        if stack.is_empty():
+            stack.push(character)
+            continue
+        
+        # if stack is not empty  and the operator has lower precedence than the top of the stack, 
+        # pop from stack and append to postfix
+        while not stack.is_empty() and operators[character] <= operators[stack.peek()]:
+            postfix += stack.pop()
+        # if the stack is empty or the precedence of operator is higher precedence
+        # push the operator to stack
+        stack.push(character)
+    
+    # pop all remaining operators from stack and append to postfix
+    while not stack.is_empty():
+        postfix += stack.pop()
+
+    return postfix
+
+infix = 'a*b+c'
+
+print(f'infix notation: {infix}')
+print(f'postfix notation: {infix_to_postfix(infix)}')
+
+infix = 'a+b*c'
+
+print(f'infix notation: {infix}')
+print(f'postfix notation: {infix_to_postfix(infix)}')
+
+infix = 'a+b*c*d+e'
+
+print(f'infix notation: {infix}')
+print(f'postfix notation: {infix_to_postfix(infix)}')
+
+# Output
+
+# infix notation: a*b+c
+# postfix notation: ab*c+
+# infix notation: a+b*c
+# postfix notation: abc*+
+# infix notation: a+b*c*d+e
+# postfix notation: abc*d*+e+
+
+# Note: This program works for only * and + operators. We can easily change it to work for other operators as well.
+
