@@ -1,5 +1,7 @@
 # DSA-with-Python_Bootcamp
+
 # Exploring Data Structure and Algorithm(DSA) with Python(Day wise and chapters):
+
     Day 1: Repo setup, What is DSA and Python List
     Day 2: Sorting Basics and Bubble Sort
     Day 3: Selection Sort
@@ -23,3 +25,4 @@
     Day21: Delete Operations in Doubly Linked List
     Day22: Examples of Doubly Linked List
     Day23: Stack
+    Day24: Queue

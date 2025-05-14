@@ -1,0 +1,182 @@
+# Introduction to Queue
+"""
+A queue data structure is similar to a real-life queue. Suppose you're in line at a movie theater:
+
+The first person in the line will be the first to get the tickets, and the last person in the line will be the last one. This method is called first-in-first-out (FIFO).
+
+In a queue, elements are entered from the rear and removed from the front, so the first elements entered will be the first to be removed.
+
+In computer science, a queue is used to maintain operations in a particular order. It is commonly used in scenarios like managing processes in an operating system and handling requests on a web server.
+
+Next, you'll learn how to create a queue in Python.
+"""
+
+# Create a Queue
+"""
+We can create a queue in three simple steps:
+
+1. Create an empty queue.
+We'll use a list to represent the queue
+queue = []
+
+2. Add elements to the queue.
+Adding elements is called enqueueing.
+
+We use the list's append() method to add items to the rear (end) of the queue.
+
+# Add two elements to the queue
+queue.append(10)
+queue.append(5)
+3. Remove elements from the queue.
+
+Removing elements is called dequeueing.
+
+A queue follows First-In-First-Out (FIFO) — so we remove from the front of the list using pop(0).
+To do this in Python, you can use pop(0) — it takes out and gives you the element at the front of the queue.
+
+# Remove the first elemen
+"""
+
+# Visualize Queue
+# create class to represent queue
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        return self.queue.pop(0)
+
+    def print_queue(self, message):
+        print(f"{message}: {self.queue}")
+
+# Initialize the queue
+queue1 = Queue()
+
+# Add elements to the queue
+queue1.enqueue(5)
+queue1.enqueue(10)
+queue1.enqueue(100)
+
+# Print the queue
+queue1.print_queue("Queue after adding 3 elements")
+
+# Remove one item
+print(f"Dequeued Element: {queue1.dequeue()}")
+queue1.print_queue("After removing one item")
+
+# Remove another item
+print(f"Dequeued Element: {queue1.dequeue()}")
+queue1.print_queue("After removing another item")
+
+# Source Code: Create a Queue
+# Create a class to represent a queue
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    # Add an item to the queue (enqueue)
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    # Remove the front item from the queue (dequeue)
+    def dequeue(self):
+        return self.queue.pop(0)
+
+    # Print the current state of the queue with a message
+    def print_queue(self, message):
+        print(f"{message}: {self.queue}")
+
+# Initialize the queue
+queue1 = Queue()
+
+# Add elements to the queue
+queue1.enqueue(5)
+queue1.enqueue(10)
+queue1.enqueue(100)
+
+# Print the queue
+queue1.print_queue("Queue after adding 3 elements")
+
+# Remove one item
+print(f"Dequeued Element: {queue1.dequeue()}")
+queue1.print_queue("After removing one item")
+
+# Remove another item
+print(f"Dequeued Element: {queue1.dequeue()}")
+queue1.print_queue("After removing another item")
+
+# Output
+
+# Queue after adding 3 elements: [5, 10, 100]
+# Dequeued Element: 5
+# After removing one item: [10, 100]
+# Dequeued Element: 10
+# After removing another item: [100]
+
+# Queue Operations
+"""
+Now that you know what a queue is, let's perform a few basic operations.
+
+    --is_empty - Checks if the queue is empty.
+    --peek - Returns the element at the front of the queue without removing it.
+Next, you'll implement the is_empty operation.
+"""
+
+# Check if Queue is Empty
+"""
+If we try to dequeue from an empty queue, it can cause an error.
+
+To avoid this, we should always check if the queue is empty before removing elements.
+# Return True if the queue is empty
+def is_empty(self):
+    return len(self.queue) == 0
+We'll now update the dequeue() method to use is_empty() before removing elements:
+def dequeue(self):
+    if not self.is_empty():
+        return self.queue.pop(0)
+    else:
+        print("Queue is empty. Nothing to dequeue.")
+        return None
+
+Output
+
+Queue After Adding 2 Elements: [10, 5]
+After One Dequeue: [5]
+After Two Dequeues: []
+Queue Is Empty. Nothing To Dequeue.
+After Third Dequeue: []
+"""
+
+# Peek the Queue
+"""
+The peek() operation lets you view the first element of the queue without removing it.
+
+To access the first element of a list, we can use 0 as an index.
+
+queue = []
+
+# Add items
+queue.append(10)
+queue.append(20)
+queue.append(30)
+
+# Peek the first item
+print(queue[0])   # Output: 10
+
+So in our queue class, the peek() method simply returns the element at index 0, if the queue is not empty.
+
+# Function to peek at the front of the queue
+def peek(self):
+    if not self.is_empty():
+        return self.queue[0]
+
+Output
+
+Queue after adding 3 elements: [5, 10, 100]
+Queue after removing 1 element: [10, 100]
+Peek the queue: 10
+Queue after peeking: [10, 100]
+"""
