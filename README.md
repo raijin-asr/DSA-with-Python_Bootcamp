@@ -26,3 +26,4 @@
     Day22: Examples of Doubly Linked List
     Day23: Stack
     Day24: Queue
+    Day25: Fixed-size Queue

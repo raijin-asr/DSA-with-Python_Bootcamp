@@ -1,0 +1,307 @@
+# Introduction
+"""
+In the last lesson, we worked with a flexible-sized queue — meaning we could add as many elements as we wanted.
+
+This was possible because we used Python lists, which are dynamically resizable.
+
+However, in many real-world applications, using an unlimited-size queue is not ideal due to resource constraints.
+"""
+
+# Fixed-size Queue Example
+"""
+Consider a video streaming service.
+
+These platforms often use a queue as a buffer to store upcoming video frames. This ensures smooth playback by having data ready before it's needed.
+
+A fixed-size queue buffering upcoming video frames for smooth playback
+
+The first video frame that enters this buffer queue is the first one displayed to the viewer.
+
+If we use an unlimited-size queue (like in our previous lesson) for this buffer, the application might preload an excessive amount of video data—consuming unnecessary bandwidth and memory resources.
+
+This is a good situation where a fixed-size queue is often preferred, as it allows enough video to be preloaded to prevent buffering interruptions, while also optimizing bandwidth usage and memory.
+"""
+
+# Implementation of Fixed-size Queue
+"""
+To implement a fixed-size queue, we start by creating a list with a predefined capacity.
+
+capacity = 5
+
+# Create a list of size 5 filled with None
+queue = [None] * capacity
+Previously, we used list's append() method to add elements from the rear and pop(0) to remove elements from the front. These methods change the size of the list.
+
+Therefore, to implement a fixed-size queue, these list-resizing methods are not suitable. Instead, we need to use front and rear pointers (indices) to keep track of where elements should be added and removed without changing the list's size
+"""
+
+# Front and Rear Pointers
+"""
+In our previous lesson with dynamically sized lists, we conceptually added elements (enqueued) from the rear using append() and removed them from the front (dequeued) using pop(0).
+
+This combination implements the First-In, First-Out (FIFO) principle.
+
+However, in a fixed-size queue, we manage the queue using two pointers:
+
+rear: points to the last inserted element
+front: points to the element to be removed next
+"""
+
+# Rear Index
+"""
+The rear index keeps track of the last inserted element in the queue.
+
+Every time you enqueue an item:
+    --The rear index is incremented.
+    --The new item is inserted at that position.
+
+This helps maintain the correct insertion order, making sure the queue follows the First-In, First-Out (FIFO) principle.
+"""
+
+# Front Index
+"""
+The front index points to the element that will be removed next.
+
+front = 0 points to the first element (77) that will be removed next.
+
+Note: As long as a data structure follows the FIFO principle, it behaves like a queue — no matter how it's implemented underneath
+"""
+
+# Implementation of Enqueuing (Adding) Elements
+"""
+To insert an item into a fixed-size queue, we follow these steps:
+
+Set rear = -1 when initializing the queue (nothing is inserted yet).
+Each time we enqueue, we increment rear and insert the item at that position.
+
+Here's the code:
+"""
+class Queue:
+    
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.queue = [None] * capacity
+        self.rear = -1  # Points to the last inserted item
+
+    # Insert elements to the queue
+    def enqueue(self, item):
+        self.rear += 1
+        self.queue[self.rear] = item
+
+    # Display the queue
+    def display(self):
+        print(self.queue)
+
+queue1 = Queue(5)
+
+print("Initial queue:")
+queue1.display()
+
+# Insert two items into the queue
+queue1.enqueue(12)
+queue1.enqueue(77)
+
+print("After inserting two elements:")
+queue1.display()
+
+# Output
+
+# Initial queue:
+# [None, None, None, None, None]
+# After inserting two elements:
+# [12, 77, None, None, None]
+
+# Implementation of Dequeuing (Removing) Elements
+"""
+To remove from a queue:
+
+front starts at 0 (first element to remove)
+dequeue() returns the element at front, clears it, and moves front forward
+
+Here's how the code looks:
+"""
+
+class Queue:
+    
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.queue = [None] * capacity
+        
+        # rear points to the last inserted element (starts at -1 because queue is empty)
+        self.rear = -1
+
+        # front points to the element to be removed next
+        self.front = 0
+
+    # Insert elements into the queue
+    def enqueue(self, item):
+        # Move rear to the next position
+        self.rear += 1
+
+        # Add the item at the new rear index
+        self.queue[self.rear] = item
+
+    # Remove elements from the queue
+    def dequeue(self):
+        item_removed = self.queue[self.front]
+        self.queue[self.front] = None
+        self.front += 1
+        return item_removed
+
+    # Display the queue
+    def display(self):
+        print(self.queue)
+
+queue1 = Queue(5)
+
+print("Initial queue:")
+queue1.display()
+
+queue1.enqueue(12)
+queue1.enqueue(77)
+
+print("After inserting two elements:")
+queue1.display()
+
+print(f"Item removed: {queue1.dequeue()}")
+print("After removing an item:")
+queue1.display()
+
+# Output
+
+# Initial queue:
+# [None, None, None, None, None]
+# After inserting two elements:
+# [12, 77, None, None, None]
+# Item removed: 12
+# After removing an item:
+# [None, 77, None, None, None]
+
+# Additional Checks to Avoid Error
+"""
+Our fixed-size queue works — but there are a couple of important edge cases we still need to handle.
+
+1. Enqueuing a filled list.
+If we try to enqueue an element when the queue is already full, there's no space left to store the new item. This will lead to an error.
+
+2. Dequeuing an empty list.
+While dequeuing from an empty queue won't raise an error in Python, it will result in returning None or reading invalid data. This can lead to incorrect results in your program.
+
+To handle this, we should
+--Check if the queue is full before enqueueing.
+--Check if the queue is empty before dequeuing.
+"""
+
+# Source Code: Fixed Sized Queue
+"""
+In the implementation below, we've completed our fixed-size queue by adding two important methods:
+
+--is_full() — to check if the queue has reached its maximum capacity
+--is_empty() — to check if the queue has no elements left to remove
+
+To make these checks possible, we've introduced a new attribute: count.
+--count keeps track of the number of elements currently in the queue.
+--It increases by 1 every time we enqueue an item.
+--It decreases by 1 every time we dequeue an item.
+By comparing count to the queue's capacity, we can easily determine whether the queue is full or empty.
+"""
+
+class Queue:
+    
+    def __init__(self, capacity):
+        # Set the queue's maximum size
+        self.capacity = capacity
+
+        # Create the fixed-size list
+        self.queue = [None] * capacity
+
+        # Rear starts at -1 to indicate no items have been added yet
+        self.rear = -1
+
+        # Front starts at 0 to remove from the first slot
+        self.front = 0
+
+        # Count keeps track of the number of items in the queue
+        self.count = 0
+
+    # Check if the queue is full
+    def is_full(self):
+        return self.count == self.capacity
+
+    # Check if the queue is empty
+    def is_empty(self):
+        return self.count == 0
+
+    # Insert elements into the queue
+    def enqueue(self, item):
+        if self.is_full():
+            print("We can't add elements. The queue is full.")
+            return
+
+        # Move rear forward before inserting
+        self.rear += 1
+        self.queue[self.rear] = item
+        self.count += 1
+
+    # Remove elements from the queue
+    def dequeue(self):
+        if self.is_empty():
+            print("We can't remove elements. The queue is empty.")
+            return None
+
+        item_removed = self.queue[self.front]
+        self.queue[self.front] = None
+        self.front += 1
+        self.count -= 1
+        return item_removed
+
+    # Display the queue
+    def display(self):
+        print(self.queue)
+
+queue1 = Queue(5)
+
+print("Initial queue:")
+queue1.display()
+print("---")
+
+queue1.enqueue(12)
+queue1.enqueue(77)
+
+print("After inserting two elements:")
+queue1.display()
+print("---")
+
+print(f"Item removed: {queue1.dequeue()}")
+print("After removing an item:")
+queue1.display()
+print("---")
+
+print(f"Item removed: {queue1.dequeue()}")
+print("After removing an item:")
+queue1.display()
+print("---")
+
+# Try removing from an empty queue
+print(f"Item removed: {queue1.dequeue()}")
+queue1.display()
+
+# Output
+
+# Initial queue:
+# [None, None, None, None, None]
+# ---
+# After inserting two elements:
+# [12, 77, None, None, None]
+# ---
+# Item removed: 12
+# After removing an item:
+# [None, 77, None, None, None]
+# ---
+# Item removed: 77
+# After removing an item:
+# [None, None, None, None, None]
+# ---
+# We can't remove elements. The queue is empty.
+# Item removed: None
+# [None, None, None, None, None]
