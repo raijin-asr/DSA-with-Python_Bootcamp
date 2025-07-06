@@ -31,3 +31,4 @@
     Day27: Deque
     Day28: Intro to Hashing
     Day29: Hashing Techniques
+    Day30: Hash Collision
