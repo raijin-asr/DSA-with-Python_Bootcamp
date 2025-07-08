@@ -1,0 +1,246 @@
+## Introduction
+
+
+Hash collisions are inevitable because we cannot predict the input that will be used for hashing.
+
+Therefore, it is more practical to manage collisions when they occur rather than try to avoid them entirely.
+
+Two of the most common strategies for collision resolution are:
+
+Separate Chaining
+Open Addressing
+Let's start with separate chaining
+
+## Separate Chaining
+Consider the hash function: H(x) = x mod 10 and the following keys 12, 17, 15, 4, 27, 14, and 37.
+
+https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.1.png
+
+Here, 4 and 14 keys have the same hash, and 37, 27, and 17 keys have the same hash, resulting in collisions.
+
+The separate chaining technique resolves these collisions by utilizing linked lists.
+
+In this technique, each slot is a linked list. If two keys have the same hash, both will be placed into the same cell as items of a linked list.
+
+https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.2.png
+
+## Thought Process: Chaining
+In separate chaining, each slot of the hash table is a linked list.
+
+So, let's first create a linked list class to handle linked list operations (visit Chapter 10 for more details).
+
+```
+# a class to represent a node
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+# a class to represent a linked list
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    # return the linked list elements
+    def traverse(self):
+        current = self.head
+
+        result = ""
+
+        while current:
+            result += (f"{current.data}->")
+            current = current.next
+        
+        result += "None"
+
+        return result   
+    
+    # append an item to the linked list
+    def append(self, data):
+
+        new_node = Node(data)
+
+        if self.head is None:
+            self.head = new_node
+            return
+       
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+data = [1, 4, 2, 9]
+
+ll = LinkedList()
+
+# append the data to the linked list
+for x in data:
+    ll.append(x)
+
+# display the linked list
+print(ll.traverse())
+```
+
+Output
+1->4->2->9->None
+
+## Thought Process: Chaining Implementation
+Previously, our method of inserting items into the hash table looked like this:
+
+```
+# method to insert an item
+def put(self, key):
+
+    hash_value = self.hash_function(key)
+    self.table[hash_value] = key
+```
+
+We need to modify this method so each slot is a linked list.
+```
+# insert data to hash table
+def put(self, key):
+    # insert into table
+    hash_value = self.hash_function(key)
+    # if the slot is empty	
+    if not self.table[hash_value]:
+        # create a linked list at the slot
+        self.table[hash_value] = LinkedList()
+    # append item to the linked list
+    self.table[hash_value].append(key)
+```
+
+Here is how it works:
+
+--At a specific slot in the hash table, we start by creating a linked list if it doesn't already exist.
+--Next, we append the key to this linked list, ensuring that all keys are mapped to the same slot.
+
+We will also modify the display() method so that items in the linked list are traversed and displayed.
+
+The LinkedList class already includes the traverse() method for this purpose. This method traverses a linked list and returns its items in the form of a string: item1->item2->None.
+
+```
+# display hash table
+def display(self):
+    for hash_value, key in enumerate(self.table):
+        # if slot is a linked list
+        if key: 
+            print(f"{hash_value}: {key.traverse()}")
+        # if slot is empty
+        else:
+            print(f"{hash_value}: {key}")
+```
+
+## Source Code: Chaining
+
+```
+class HashData:
+
+    # initialize a list of 10 items
+    def __init__(self):
+        self.table = [None] * 10
+
+    # compute hash
+    def hash_function(self, key):
+        return key % 10
+
+    # insert data to hash table
+    def put(self, key):
+        # insert into table
+        hash_value = self.hash_function(key)
+         # if the slot is empty	
+        if not self.table[hash_value]:
+            # create a linked list at the slot
+            self.table[hash_value] = LinkedList()
+        # append item to the linked list
+        self.table[hash_value].append(key)
+
+    # display hash table
+    def display(self):
+        for hash_value, key in enumerate(self.table):
+            # if slot is a linked list
+            if key: 
+                print(f"{hash_value}: {key.traverse()}")
+            # if slot is empty
+            else:
+                print(f"{hash_value}: {key}")
+
+hash1 = HashData()
+
+# keys
+keys = [12, 17, 15, 4, 27, 14, 37]
+
+# apply hash function to each key
+for key in keys:
+    hash1.put(key)
+
+hash1.display()
+```
+
+Output
+0: None
+1: None
+2: 12->None
+3: None
+4: 4->14->None
+5: 15->None
+6: None
+7: 17->27->37->None
+8: None
+9: None
+
+
+As you can see, slots with hash values 4 and 7 contain linked lists with multiple items.
+
+## Retrieve Value from a Hash Table
+
+Here's the hash table output from the last example.
+0: None
+1: None
+2: 12->None
+3: None
+4: 4->14->None
+5: 15->None
+6: None
+7: 17->27->37->None
+8: None
+9: None
+
+Suppose we need to retrieve item 27 from this hash table. Here's how we can achieve this:
+
+1. Apply the hash function to find the hash value. For the key 27, the hash is 7.
+2. Then, look into the hash table with this hash. This will give us a linked list (or None if the item doesn't exist).
+3. Then, we will traverse the linked list until the item is found or the last element of the linked list is reached.
+
+Let's add a method to implement this in our code and see how it works next.
+
+In the HashData class, we will add this method.
+
+This method returns None if the element is not in the hash table. If the element is in the hash table, it returns that value.
+```# retrieve key from hash table
+def retrieve(self, item):
+    hash_value = self.hash_function(item)
+    key = self.table[hash_value]
+    if key:
+        current = key.head
+        # when value is found, stop traversal
+        while current:
+            if current.data == item:
+                return {"hash_value": hash_value, "key": item}
+            current = current.next
+    return {"hash_value": hash_value, "key": None}
+    ```
+
+Output
+
+{'hash_value': 2, 'key': 12}
+{'hash_value': 7, 'key': None} 
+
+## Time Complexity
+The worst case of retrieval method is when all the keys are mapped to a single slot. In such cases, the retrieval method has a time complexity of O(n).
+
+This is because the time to compute the initial hash is O(1), and the time to traverse the linked list is O(n). Therefore, O(1) + O(n) is equivalent to O(n).
+
+In the average case, assuming a good hash function and a balanced distribution of keys, the length of the linked lists tends to be proportional to the load factor (ʎ), leading to O(ʎ).
+
+Time Complexity: O(ʎ)
+

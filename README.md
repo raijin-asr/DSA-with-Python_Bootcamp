@@ -32,3 +32,4 @@
     Day28: Intro to Hashing
     Day29: Hashing Techniques
     Day30: Hash Collision
+    Day31: Separate Chaining
