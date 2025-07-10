@@ -33,3 +33,4 @@
     Day29: Hashing Techniques
     Day30: Hash Collision
     Day31: Separate Chaining
+    Day32: Linear Probing
