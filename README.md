@@ -34,3 +34,4 @@
     Day30: Hash Collision
     Day31: Separate Chaining
     Day32: Linear Probing
+    Day33: Quadratic Probing
