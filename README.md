@@ -35,3 +35,4 @@
     Day31: Separate Chaining
     Day32: Linear Probing
     Day33: Quadratic Probing
+    Day34: Double Hashing
