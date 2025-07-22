@@ -36,3 +36,4 @@
     Day32: Linear Probing
     Day33: Quadratic Probing
     Day34: Double Hashing
+    Day35: Hash Function
