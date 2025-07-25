@@ -37,3 +37,4 @@
     Day33: Quadratic Probing
     Day34: Double Hashing
     Day35: Hash Function
+    Day36: Why HashMap, Insert into HashMap
