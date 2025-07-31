@@ -40,3 +40,4 @@
     Day36: Why HashMap, Insert into HashMap
     Day37: Fetching a Value From a Hashmap
     Day38: Thought process and Source code of HashMap
+    Day39: Applications of Hashing
