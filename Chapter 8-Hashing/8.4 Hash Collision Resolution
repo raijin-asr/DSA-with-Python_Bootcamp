@@ -12,14 +12,14 @@ Let's start with separate chaining
 ## Separate Chaining
 Consider the hash function: H(x) = x mod 10 and the following keys 12, 17, 15, 4, 27, 14, and 37.
 
-https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.1.png
+![img](https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.1.png)
 
 Here, 4 and 14 keys have the same hash, and 37, 27, and 17 keys have the same hash, resulting in collisions.
 The separate chaining technique resolves these collisions by utilizing linked lists.
 
 In this technique, each slot is a linked list. If two keys have the same hash, both will be placed into the same cell as items of a linked list.
 
-https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.2.png
+![img](https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.2.png)
 
 ## Thought Process: Chaining
 In separate chaining, each slot of the hash table is a linked list.
@@ -257,10 +257,10 @@ The objective is to find the closest unoccupied position for the colliding item.
 ## Working of Linear Probing
 Consider the hash function: H(x) = x mod 10 and the following keys 12, 17, 15, 4, 27, 14, and 37.
 
-https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.3.png
+![img](https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.3.png)
 
 The linear probing technique resolves these collisions by inserting these keys into the next empty slot.
-https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.4.png
+![img](https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.4.png)
 
 -Key 14 maps to slot 4(occupied), so it moves to the next empty slot(slot 6 since slot 5 is also occupied).
 -Key 27 maps to slot 7(occupied), so it moves to the next empty slot(slot 8).
@@ -595,7 +595,7 @@ H(26) = (2 + 0 * 5) % 12 = 2 (Collision)
 H(26) = (2 + 1 * 5) % 12 = 7 
 
 This is the final form of the hash table:
-https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.5.png
+![img](https://cdn.programiz.pro/course-images/dsa-with-python/dsa-8.4.5.png)
 
 
 ## Working of Double Hashing
