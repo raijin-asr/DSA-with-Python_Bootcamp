@@ -43,3 +43,4 @@
     Day39: Applications of Hashing
     Day40: String Matching Algorithm
     Day41: Brute Force Method and its working
+    Day42: Rabin-Karp Algorithm, its working
