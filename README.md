@@ -44,3 +44,4 @@
     Day40: String Matching Algorithm
     Day41: Brute Force Method and its working
     Day42: Rabin-Karp Algorithm, its working
+    Day43: Hasing in Rabin-Karp, Rolling Hash, and its source code
