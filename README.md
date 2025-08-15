@@ -48,3 +48,4 @@
     Day44: Knuth-Morris-Pratt (KMP) algorithm
     Day45: Non- Linear Data Structure
     Day46: Tree Data Structure
+    Day47: Implementation of Trees
