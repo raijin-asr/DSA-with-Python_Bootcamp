@@ -53,3 +53,4 @@
     Day49: PreOrder Tree Traversal
     Day50: PostOrder Traversal
     Day51: Breadth-First Traversal
+    Day52: Binary Tree
