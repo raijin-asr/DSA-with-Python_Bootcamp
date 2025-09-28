@@ -1,19 +1,18 @@
-# Introduction------------------
-# Merge sort breaks a list into multiple sublists, and each sublist is then sorted individually.
-# Then, the sorted sublists are combined to form the sorted list.
-# This strategy is known as divide-and-conquer.
+## Introduction------------------
+Merge sort breaks a list into multiple sublists, and each sublist is then sorted individually.
+Then, the sorted sublists are combined to form the sorted list.
+This strategy is known as divide-and-conquer.
 
-"""
-How do Divide-And-Conquer Algorithms Work?-----
+
+## How do Divide-And-Conquer Algorithms Work?-----
 The divide-and-conquer approach involves three main steps:
 
 1. Divide: Divide the given problem into smaller subproblems (mostly using recursion).
 2. Conquer: Solve the smaller subproblems recursively. If the subproblem is small enough, solve it directly using a base case.
 3. Combine: Combine the solutions of the subproblems that are part of the recursive process to solve the actual problem.
-"""
 
-# Working of Merge Sort:-----------
-"""
+
+## Working of Merge Sort:-----------
 Suppose we have the following unsorted list.
 5,4,7,3,2
 
@@ -42,13 +41,14 @@ Here, the conquer and combine steps go side by side.
 4,5 and 2,3,7 -> 2,3,4,5,7
 
 This is how the merge sort works. It is a stable sorting algorithm and has a time complexity of O(n log n).
-"""
 
-# Thought Process to Implement Merge Sort----------
-"""Divide the List Recursively
+
+## Thought Process to Implement Merge Sort----------
+Divide the List Recursively
 First, we need to divide the list into equal halves recursively until we get individual elements. Here's how we can do it:
 
-1. Find the midpoint of the list."""
+1. Find the midpoint of the list.
+```
 def merge_sort(lst):
     mid = len(lst) # 2
 
@@ -99,12 +99,12 @@ def merge_sort(lst):
  
 data = [6, 8, 1, 4, 5, 3, 7, 2]
 merge_sort(data)
+```
 
+Here, we have added print() statements to get an idea on how our merge_sort() function works.
 
-# Here, we have added print() statements to get an idea on how our merge_sort() function works.
+Output
 
-# Output
-"""
 lst: [6, 8, 1, 4, 5, 3, 7, 2]
 mid: 5
 lst: [6, 8, 1, 4]
@@ -138,27 +138,27 @@ Right partition: ---
 As you can see, the merge_sort() function is dividing lists until we get a list of one element.
 In the program, the merge_sort() function is returning '---'.
 However, to perform conquer and combine, we will call another function merge() from the return statement. This function will combine individual elements in a sorted manner, which we will explore next.
-"""
 
 
-"""# Thought Process: The merge() Function----------"""
-# Suppose we have two sorted lists: left and right.
+## Thought Process: The merge() Function----------"""
+Suppose we have two sorted lists: left and right.
 left = [5]
 right = [4]
 
-# Our goal is to get this sorted list, [4, 5], by merging them.
-# The merge() function should also work for lists with more than one element.
+Our goal is to get this sorted list, [4, 5], by merging them.
+The merge() function should also work for lists with more than one element.
 
-# Suppose we have two sorted lists: left and right.
+Suppose we have two sorted lists: left and right.
 left = [4, 5]
 right = [2, 3, 7]
 
-# Our goal is to get this sorted list, [2, 3, 4, 5, 7], by merging them.
+Our goal is to get this sorted list, [2, 3, 4, 5, 7], by merging them.
 
-# Here's how we can implement this functionality inside the merge() function.
+Here's how we can implement this functionality inside the merge() function.
 
-# 1. Compare the elements of left and right and add the smaller element to the output list
-# [left, right] = [[4, 5], [2, 3, 7]]     
+1. Compare the elements of left and right and add the smaller element to the output list
+```
+[left, right] = [[4, 5], [2, 3, 7]]     
 # compare 4 from left and 2 from right, so 2 is smaller and add it to the output list
 
 # empty list to store the merged result
@@ -178,9 +178,9 @@ if left[i] < right[j]:
 # else, add the element of right list
 else:
     output.append(right[j])
-
-# 2. Repeat Step 1 for all elements in both lists until we reach the end of one of the lists.
-# Using a loop, we need to compare elements of left with the element elements of right in the manner shown below:
+```
+2. Repeat Step 1 for all elements in both lists until we reach the end of one of the lists.
+Using a loop, we need to compare elements of left with the element elements of right in the manner shown below:
 
 [4, 5], [2, 3, 7], output = [2]
 [4, 5], [3, 7], #again, compare 4 and 3, 3 is smaller, so output = [2, 3]
@@ -188,7 +188,8 @@ else:
 [5], [7], #again, compare 5 and 7, 5 is smaller, so output = [2, 3, 4, 5]
 [], [7], #left list is empty, so add all elements of right to the output list
 
-# This allows us to extract the smallest elements one by one.
+This allows us to extract the smallest elements one by one.
+```
 output = [ ]
 
 i = 0
@@ -203,9 +204,11 @@ while i < len(left) and j < len(right):
     else:
         output.append(right[j])
         j += 1;    # increment j
-# The loop terminates once one of the lists exceeds its bounds.
+```
+The loop terminates once one of the lists exceeds its bounds.
 
-# 3. Outside the loop, append the remaining elements and return the output list.
+3. Outside the loop, append the remaining elements and return the output list.
+```
 def merge(left, right):
     output = [ ]
 
@@ -226,10 +229,10 @@ def merge(left, right):
     output.extend(right[j:])
 
     return output
+```
 
-
-"""Source Code: merge() Function
-"""
+## Source Code: merge() Function
+```
 def merge(left, right):
     output = [ ]
  
@@ -256,9 +259,10 @@ print(merge([5], [8]))    # [5, 8]
 print(merge([8], [5]))    # [5, 8]
 print(merge([3, 4], [7, 10]))  # [3, 4, 7, 10]
 print(merge([3, 4], [7, 10, 11]))  # [3, 4, 7, 10, 11]
+```
 
-# Note: For this function to work, left and right must already be sorted.
-# As you can see, the merge() function merges two lists in a sorted order.
+Note: For this function to work, left and right must already be sorted.
+As you can see, the merge() function merges two lists in a sorted order.
 
 """Next, we will combine the divide part and the merge part in the same code to create our merge sort program.
 
