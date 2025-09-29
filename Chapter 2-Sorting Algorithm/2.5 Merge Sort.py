@@ -264,10 +264,10 @@ print(merge([3, 4], [7, 10, 11]))  # [3, 4, 7, 10, 11]
 Note: For this function to work, left and right must already be sorted.
 As you can see, the merge() function merges two lists in a sorted order.
 
-"""Next, we will combine the divide part and the merge part in the same code to create our merge sort program.
+Next, we will combine the divide part and the merge part in the same code to create our merge sort program.
 
-Source Code: Merge Sort
-"""
+## Source Code: Merge Sort
+```
 # function to perform merge sort
 def merge_sort(lst):
  
@@ -321,27 +321,26 @@ print(f"Unsorted: {data}")
 result = merge_sort(data)
  
 print(f"Sorted: {result}")
+```
 
-# Output
+Output
+Unsorted: [6, 8, 1, 4, 5, 3, 7, 2]
+Sorted: [1, 2, 3, 4, 5, 6, 7, 8]
 
-# Unsorted: [6, 8, 1, 4, 5, 3, 7, 2]
-# Sorted: [1, 2, 3, 4, 5, 6, 7, 8]
+In this program, the merge_sort() function handles the divide part and the merge() function handles the conquer part.
 
-# In this program, the merge_sort() function handles the divide part and the merge() function handles the conquer part.
-
-# Idea Emoji
-# Tip: If you're learning merge sort for the first time, its implementation can be challenging to grasp. If you have any confusion, we suggest you go through this lesson again. You will have a much better understanding on the second read.
+Tip: If you're learning merge sort for the first time, its implementation can be challenging to grasp. If you have any confusion, we suggest you go through this lesson again. You will have a much better understanding on the second read.
 
 
-"""PROBLEM1: Merge Sort Implementation
+## PROBLEM1: Merge Sort Implementation
 
 Problem Description
 Can you write the merge sort program on your own?
 
 Create a function named merge_sort() that takes a list of numbers as its argument.
 Sort the list using merge sort and return it.
-Outside the function, print the returned list."""
-
+Outside the function, print the returned list.
+```
 def merge_sort(lst):
     
 # base condition:
@@ -394,11 +393,10 @@ data_list = list(map(int, input().split()))
 sorted_list = merge_sort(data_list)
 
 print(sorted_list)
+```
 
 
-
-"""
-Practice: PROBLEM2
+## Practice: PROBLEM2
 Merge Sort in Descending Order
 Easy
 Problem Description
@@ -407,8 +405,8 @@ Write a program to sort the list items in descending order using merge sort.
 Create a function named merge_sort() that takes a list as its argument.
 Sort the list in descending order within the function and return the sorted list.
 Print the sorted list from outside the function.
-"""
 
+```
 def merge_sort(lst):
     
 # base condition:
@@ -461,11 +459,9 @@ data_list = list(map(int, input().split()))
 sorted_list = merge_sort(data_list)
 
 print(sorted_list)
+```
 
-
-
-"""
-Practice:
+## Practice:
 Nth Smallest Element of Two Sorted Lists
 Easy
 Problem Description
@@ -483,8 +479,8 @@ For lists [4, 9, 11] and [3, 5, 7]. It's 4th smallest element is 7.
 It's because if we merge these lists in ascending order, we will get [3, 4, 5, 7, 9, 11]. Hence, the 4th smallest element is 7.
 
 Tip: Use the logic of the merge() function we previously created to merge lists in ascending order. Then, find the nth element.
-"""
 
+```
 def find_smallest_number(nums1, nums2, n):
     output = [ ]
  
@@ -518,37 +514,34 @@ n = int(input())
 result = find_smallest_number(nums1, nums2, n)
 
 print(result)
+```
 
-# OUTPUT:
-# Input 
-# 5 6 7
-# 3 5 9
-# 2
+OUTPUT:
+Input 
+5 6 7
+3 5 9
+2
 
-# Your Output 
-# 5
+Your Output 
+5
 
-# Expected Output 
-# 5
+Expected Output 
+5
 
 
-"""
-Time Complexity
+## Time Complexity
 As recursion is used in merge sort, we need to use the master theorem to find its complexity.
 
 Best Case Complexity: O(n log n)
 Worst Case Complexity: O(n log n)
 Average Case Complexity: O(n log n)
-"""
 
-
-"""
-Space Complexity
+## Space Complexity
 In the merge phase, elements from two sublists are copied into a newly created list. In the very last merge step, the new list is exactly as large as the list to be sorted.
 Thus, if the input list is twice as large, the additional storage space required is doubled.
 
 So, the space complexity of the merge sort is O(n).
-"""
 
-# Applications of Merge Sort
-# Use merge sort to sort large amounts of data accurately and efficiently. It works better than bubble sort, selection sort, and insertion sort in most cases.
+
+## Applications of Merge Sort
+Use merge sort to sort large amounts of data accurately and efficiently. It works better than bubble sort, selection sort, and insertion sort in most cases.
