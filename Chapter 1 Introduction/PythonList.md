@@ -1,5 +1,5 @@
-# Python Lists:
-
+## Python Lists:
+```
 # Slicing a List:
 numbers = [10, 20, 30, 40, 50, 60 ]
 
@@ -51,30 +51,33 @@ print(numbers[:])   # [10, 20, 30, 40, 50, 60]
 
 lst = [0] * 5
 print(lst)  # [0, 0, 0, 0, 0]
+```
 
-# List Methods:----------------------
-# Now, let's cover a few commonly used list methods. These methods are used throughout the course.
+## List Methods:----------------------
+Now, let's cover a few commonly used list methods. These methods are used throughout the course.
 
-# Method	Description
-# append()	add an element to the end of the list
-# extend()	add elements of an iterable (list, tuple, etc.) to the end of the list
-# insert()	insert an element at the specified index
-# pop()	    remove an element from the list and return it
-# reverse() 	reverse the elements of the list
+Method	Description
+append()	add an element to the end of the list
+extend()	add elements of an iterable (list, tuple, etc.) to the end of the list
+insert()	insert an element at the specified index
+pop()	    remove an element from the list and return it
+reverse() 	reverse the elements of the list
 
-# List append() and extend():
+## List append() and extend():
 
-# The append() method
-# The append() method adds an element to the end of the list.
+## The append() method
+The append() method adds an element to the end of the list.
+```
 currencies = ['Dollar', 'Euro', 'Pound']
  
 # append 'Yen' to the list
 currencies.append('Yen')
  
 print(currencies) #['Dollar', 'Euro', 'Pound', 'Yen']
+```
 
-# The extend() method
-
+## The extend() method
+```
 # The extend() method adds all the elements of an iterable (a list, tuple, string, etc.) to the end of the list.
 languages = ['French', 'English']
 languages1 = ['Spanish', 'Portuguese']
@@ -83,11 +86,12 @@ languages1 = ['Spanish', 'Portuguese']
 languages.extend(languages1)
  
 print(languages) #['French', 'English', 'Spanish', 'Portuguese']
+```
 
-# Note: The append() and extend() method also does not return any value; it only modifies the original list.
+Note: The append() and extend() method also does not return any value; it only modifies the original list.
 
-# we can also use the + operator to extend a list in Python. For example,
-
+we can also use the + operator to extend a list in Python. For example,
+```
 languages = ['French', 'English']
 languages1 = ['Spanish', 'Portuguese']
  
@@ -95,6 +99,7 @@ languages1 = ['Spanish', 'Portuguese']
 languages = languages + languages1 #same as extend()
  
 print(languages)
+```
 
 # List pop()
 # The pop() method removes the item at the specified index. The method also returns the removed item.
