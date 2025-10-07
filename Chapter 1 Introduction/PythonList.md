@@ -54,7 +54,7 @@ lst = [0] * 5
 print(lst)  # [0, 0, 0, 0, 0]
 ```
 
-## List Methods:----------------------
+## List Methods:
 
 Now, let's cover a few commonly used list methods. These methods are used throughout the course.
 
