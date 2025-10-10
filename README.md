@@ -57,3 +57,4 @@
     Day53: Properties of a Binary Tree
     Day54: Implementation of Binary Trees
     Day55: Types and Applications of Binary Tree
+    Day56: Transition py files to md for better readabilty and formatting
